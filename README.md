@@ -3,6 +3,11 @@
 Download and set up poetry from https://python-poetry.org/docs/
 
 Run
-```poetry install```
+```python
+poetry install
+```
 
-Run ```poetry run python main.py```
+Run 
+```python
+poetry install
+```
