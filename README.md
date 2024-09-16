@@ -3,11 +3,11 @@
 Download and set up poetry from https://python-poetry.org/docs/
 
 Run
-```python
+```shell
 poetry install
 ```
 
 Run 
-```python
+```shell
 poetry install
 ```
