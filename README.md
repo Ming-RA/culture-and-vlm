@@ -7,7 +7,7 @@ Run
 poetry install
 ```
 
-Run 
+Then Run to get the server running
 ```shell
-poetry install
+poetry run server
 ```
