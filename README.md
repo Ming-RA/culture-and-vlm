@@ -1,13 +1,11 @@
-# culture-and-vlm
-## Set-up
-Download and set up poetry from https://python-poetry.org/docs/
-
-Run
+# How to run
 ```shell
-poetry install
+pip install -r requirements.txt
 ```
 
-Then Run to get the server running
+Then run
 ```shell
-poetry run server
+python ollama_run.py
 ```
+
+Currently this prints to terminal, but will shortly be updated to print in a document
