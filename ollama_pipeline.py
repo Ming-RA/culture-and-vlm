@@ -1,6 +1,7 @@
 import base64
 import requests
 from openai import OpenAI
+from constants import MODEL
 
 
 class OllamaPipeline:
@@ -26,7 +27,7 @@ class OllamaPipeline:
             return "Unable to process the image due to an error with the provided URL."
 
         response = self.client.chat.completions.create(
-            model="llava:13b-v1.6-vicuna-fp16",
+            model=MODEL,
             messages=[
                 {
                     "role": "system",
