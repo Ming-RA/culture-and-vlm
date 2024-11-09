@@ -2,7 +2,7 @@ import csv
 import os
 import base64
 from process_image import process_image
-from constants import CSV_FILENAME
+from constants import CSV_FILENAME, FIELDNAMES
 
 
 def read_image_as_base64(image_path):
@@ -23,12 +23,16 @@ def main():
     # Check if the CSV file exists
     file_exists = os.path.isfile(CSV_FILENAME)
 
-    if file_exists:
+    # Initialize CSV with headers if it doesn't exist
+    if not file_exists:
+        with open(CSV_FILENAME, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+            writer.writeheader()
+        processed_count = 0
+    else:
         with open(CSV_FILENAME, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
             processed_count = sum(1 for row in reader) - 1  # Subtract header row
-    else:
-        processed_count = 0
 
     # Process images starting from where we left off
     for image_file in image_files[processed_count:]:
