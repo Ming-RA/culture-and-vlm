@@ -1,16 +1,27 @@
 import base64
 import requests
 from openai import OpenAI
-from constants import MODEL
+from constants import MODEL, SYSTEM_PROMPT
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class OllamaPipeline:
 
-    def __init__(self):
-        self.client = OpenAI(
-            base_url='http://localhost:11434/v1',
-            api_key='ollama',  # required, but unused
-        )
+    def __init__(self, provider="ollama", model=MODEL):
+        self.model = model
+        if provider == 'openai':
+            self.client = OpenAI(
+                api_key=os.getenv('OPENAI_API_KEY'),
+            )
+        elif provider == 'ollama':
+            self.client = OpenAI(
+                base_url='http://localhost:11434/v1',
+                api_key='ollama',  # required, but unused
+            )
+        else:
+            raise ValueError(f"Unsupported provider: {provider}")
 
     def encode_image_from_url(self, image_url):
         try:
@@ -21,30 +32,28 @@ class OllamaPipeline:
             print(f"Error fetching image from URL: {e}")
             return None
 
-    def analyze_image(self, image_url, prompt):
-        base64_image = self.encode_image_from_url(image_url)
-        if base64_image is None:
-            return "Unable to process the image due to an error with the provided URL."
+    def analyze_image(self, base64_image, prompt, system_prompt=SYSTEM_PROMPT):
+        messages = [
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": base64_image
+                        },
+                    },
+                ],
+            }
+        ]
 
         response = self.client.chat.completions.create(
-            model=MODEL,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a culturally aware assistant who will help with any task."
-                },
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}"
-                            },
-                        },
-                    ],
-                }
-            ],
+            model=self.model,
+            messages=messages
         )
         return response.choices[0].message.content

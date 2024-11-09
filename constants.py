@@ -1,11 +1,9 @@
-PROMPT1 = "Carefully analyze this image and answer with which country/culture/civilization is most closely associated with this image. Make sure to incorporate multiple aspects into your analysis, such as - geographical features, postures and gestures, time period and other subtle details in the images background and foreground."
-
-PROMPT2 = "Based on your choice of culture/country/civilization provide a list of 5 features in the image that most influenced your decision."
-
-PROMPT3 = "Based on the features you analyzed in this image, provide a an appropriate time period that you believe the image depicts or originates from. Be as specific as possible when appropriate by including the date, year, decade or period. In cases where the time period is unclear, suggest possible intervals of time."
+PROMPT1 = "Categorize the objects that are culturally relevant based on their function into these categories: ['Musical', 'Architecture', 'Clothing', 'Buddhist', 'Food', 'Greeting', 'Beverage', 'Garden', 'Utensils', 'Wedding', 'Tally'] Give a one word answer only!"
 
 MODEL = "llava:13b"
 
 CSV_FILENAME = "analysis_results.csv"
 
 FIELDNAMES = ['Image URL', 'Prompt', 'Analysis Result', 'Status']
+
+SYSTEM_PROMPT = "You are an expert in the intersectionality between image analysis and cultural analysis, providing insights that integrate visual elements with cultural contexts."

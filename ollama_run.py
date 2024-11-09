@@ -1,10 +1,24 @@
 import csv
 import os
+import base64
 from process_image import process_image
 from constants import CSV_FILENAME
 
 
+def read_image_as_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        base64_data = base64.b64encode(image_file.read()).decode('utf-8')
+        return f"data:image/jpeg;base64,{base64_data}"
+
+
 def main():
+    # Path to the images directory
+    images_dir = os.path.expanduser("/Users/ankurduggal/Downloads/downloaded_images")
+
+    # Get list of all image files in the directory
+    image_files = [
+        f for f in os.listdir(images_dir) if f.lower().endswith(
+            ('.png', '.jpg', '.jpeg', '.gif'))]
 
     # Check if the CSV file exists
     file_exists = os.path.isfile(CSV_FILENAME)
@@ -12,19 +26,16 @@ def main():
     if file_exists:
         with open(CSV_FILENAME, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
-            row_count = sum(1 for row in reader)
+            processed_count = sum(1 for row in reader) - 1  # Subtract header row
     else:
-        row_count = 0
+        processed_count = 0
 
-    # Try with 'ISO-8859-1' encoding
-    with open('images.csv', 'r', encoding='ISO-8859-1') as csv_file:
-        csv_reader = csv.reader(csv_file)
-        for i in range((row_count // 3) + 1):
-            next(csv_reader)  # Skip rows already processed
-
-        for row in csv_reader:
-            image_url = row[1]  # Get the URL from the second column
-            process_image(image_url)
+    # Process images starting from where we left off
+    for image_file in image_files[processed_count:]:
+        image_path = os.path.join(images_dir, image_file)
+        base64_image = read_image_as_base64(image_path)
+        image_id = image_file[:4]  # Get first 4 characters of filename
+        process_image(base64_image, image_id)
 
 
 if __name__ == "__main__":
