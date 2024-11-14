@@ -1,10 +1,12 @@
 PROMPT1 = "Categorize the objects that are culturally relevant based on their function into these categories: ['Musical', 'Architecture', 'Clothing', 'Buddhist', 'Food', 'Greeting', 'Beverage', 'Garden', 'Utensils', 'Wedding', 'Tally'] Give a one word answer only!"
 
+PROMPT2 = "Given the image and the description given by the user, please give a one or two word answer to the question: What culture is this image from?"
+
 MODEL = "llava:13b"
 
 CSV_FILENAME = "analysis_results.csv"
 
-FIELDNAMES = ['Image ID', 'Analysis Result']
+FIELDNAMES = ['Image ID', 'Category', 'Analysis Result', 'Culture']
 
 SYSTEM_PROMPT = "You are an expert in the intersectionality between image analysis and cultural analysis, providing insights that integrate visual elements with cultural contexts."
 

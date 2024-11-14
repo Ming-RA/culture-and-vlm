@@ -2,7 +2,7 @@ import csv
 import time
 import subprocess
 from ollama_pipeline import OllamaPipeline
-from constants import PROMPT1, PROMPTS, MODEL, CSV_FILENAME, FIELDNAMES
+from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES
 
 
 def process_image(base64_image, image_id):
@@ -15,8 +15,14 @@ def process_image(base64_image, image_id):
     print(f"Image Cateegory: {category}")
     print(f"PROMPT: {PROMPTS[category]}")
     result = ollama_pipeline.analyze_image(base64_image, PROMPTS[category])
+    culture = ollama_pipeline.analyze_image(base64_image, PROMPT2, messages=[
+                                            {"role": "user", "content": result}])
 
-    line = {'Image ID': image_id, 'Analysis Result': result}
+    line = {
+        'Image ID': image_id,
+        'Category': category,
+        'Analysis Result': result,
+        'Culture': culture}
 
     if provider == "ollama":
         time.sleep(1)  # Sleep for 1 second after each analysis
