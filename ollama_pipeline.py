@@ -20,6 +20,12 @@ class OllamaPipeline:
                 base_url='http://localhost:11434/v1',
                 api_key='ollama',  # required, but unused
             )
+        elif provider == 'gemini':
+            self.model = model
+            self.client = OpenAI(
+                base_url='https://generativelanguage.googleapis.com/v1beta/',
+                api_key=os.getenv('GEMINI_API_KEY'),
+            )
         else:
             raise ValueError(f"Unsupported provider: {provider}")
 
@@ -58,13 +64,13 @@ class OllamaPipeline:
         )
 
         # Add token usage tracking
-        usage = response.usage
-        input_tokens = usage.prompt_tokens
-        output_tokens = usage.completion_tokens
-        total_tokens = usage.total_tokens
+        # usage = response.usage
+        # input_tokens = usage.prompt_tokens
+        # output_tokens = usage.completion_tokens
+        # total_tokens = usage.total_tokens
 
-        print(f"Input tokens: {input_tokens}")
-        print(f"Output tokens: {output_tokens}")
-        print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
+        # print(f"Input tokens: {input_tokens}")
+        # print(f"Output tokens: {output_tokens}")
+        # print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
 
         return response.choices[0].message.content

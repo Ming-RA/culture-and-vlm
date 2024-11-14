@@ -7,16 +7,16 @@ from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES
 
 def process_image(base64_image, image_id):
 
-    provider = "openai"
-    model = "gpt-4o" if provider == "openai" else MODEL
+    provider = "gemini"
+    model = "gemini-1.5-flash-002"
     ollama_pipeline = OllamaPipeline(provider=provider, model=model)
 
-    category = ollama_pipeline.analyze_image(base64_image, PROMPT1)
+    category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
     print(f"Image Cateegory: {category}")
     print(f"PROMPT: {PROMPTS[category]}")
-    result = ollama_pipeline.analyze_image(base64_image, PROMPTS[category])
+    result = ollama_pipeline.analyze_image(base64_image, PROMPTS[category]).strip()
     culture = ollama_pipeline.analyze_image(base64_image, PROMPT2, messages=[
-                                            {"role": "user", "content": result}])
+                                            {"role": "user", "content": result}]).strip()
 
     line = {
         'Image ID': image_id,

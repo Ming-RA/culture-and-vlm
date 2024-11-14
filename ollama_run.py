@@ -1,6 +1,7 @@
 import csv
 import os
 import base64
+import time
 from process_image import process_image
 from constants import CSV_FILENAME, FIELDNAMES
 
@@ -43,6 +44,7 @@ def main():
             base64_image = read_image_as_base64(image_path)
             image_id = image_file[:4]  # Get first 4 characters of filename
             process_image(base64_image, image_id)
+            time.sleep(10)  # Sleep for 3 second after each analysis
 
 
 if __name__ == "__main__":

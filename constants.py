@@ -4,7 +4,7 @@ PROMPT2 = "Given the image and the description given by the user, please give a 
 
 MODEL = "llava:13b"
 
-CSV_FILENAME = "analysis_results.csv"
+CSV_FILENAME = "gemini_analysis_results.csv"
 
 FIELDNAMES = ['Image ID', 'Category', 'Analysis Result', 'Culture']
 
