@@ -2,7 +2,7 @@ import csv
 import time
 import subprocess
 from ollama_pipeline import OllamaPipeline
-from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES
+from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES, BOUNDING_BOX_PROMPTS
 
 
 def process_image(base64_image, image_id):
@@ -23,6 +23,36 @@ def process_image(base64_image, image_id):
         'Category': category,
         'Analysis Result': result,
         'Culture': culture}
+
+    if provider == "ollama":
+        time.sleep(1)  # Sleep for 1 second after each analysis
+        # Run the shell command to stop llava:13b
+        subprocess.run(["ollama", "stop", MODEL], check=True)
+
+    # Append results to CSV after each image is processed
+    with open(CSV_FILENAME, 'a', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+        writer.writerow(line)
+
+    print(f"Results appended to {CSV_FILENAME}")
+
+
+def bounding_boxes(base64_image, image_id):
+
+    provider = "openai"
+    model = "gpt-4o"
+    ollama_pipeline = OllamaPipeline(provider=provider, model=model)
+
+    category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
+    print(f"Image Cateegory: {category}")
+    print(f"PROMPT: {BOUNDING_BOX_PROMPTS[category]}")
+    result = ollama_pipeline.find_bounding_boxes(
+        base64_image, BOUNDING_BOX_PROMPTS[category]).strip()
+
+    line = {
+        'Image ID': image_id,
+        'Category': category,
+        'Bounding Boxes + Labels': result}
 
     if provider == "ollama":
         time.sleep(1)  # Sleep for 1 second after each analysis
