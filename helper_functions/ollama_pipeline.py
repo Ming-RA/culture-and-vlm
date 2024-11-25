@@ -1,7 +1,7 @@
 import base64
 import requests
 from openai import OpenAI
-from constants import MODEL, SYSTEM_PROMPT
+from misc.constants import MODEL, SYSTEM_PROMPT
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel

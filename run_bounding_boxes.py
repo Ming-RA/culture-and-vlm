@@ -2,8 +2,8 @@ import csv
 import os
 import base64
 import time
-from process_image import process_image, bounding_boxes
-from constants import CSV_FILENAME, FIELDNAMES
+from helper_functions.process_image import bounding_boxes
+from misc.constants import CSV_FILENAME, FIELDNAMES
 
 
 def read_image_as_base64(image_path):
@@ -15,9 +15,6 @@ def read_image_as_base64(image_path):
 def main():
     # Path to the images directory
     images_dir = os.path.expanduser("/Users/ankurduggal/Downloads/downloaded_images")
-    # images_to_be_processed = [1527, 1234, 1362, 1339, 1306, 1270,
-    #   1297, 1500, 1143, 1137, 1459, 1554, 1204, 1184, 1360, 1448]
-
     images_to_find_bounding_boxes = [
         1564,
         1563,

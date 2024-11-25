@@ -5,7 +5,7 @@ import base64
 import subprocess
 from PIL import Image
 from ollama_pipeline import OllamaPipeline
-from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES, BOUNDING_BOX_PROMPTS
+from misc.constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES, BOUNDING_BOX_PROMPTS
 
 
 def process_image(base64_image, image_id):
