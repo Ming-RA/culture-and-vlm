@@ -8,7 +8,7 @@ from pydantic import BaseModel
 load_dotenv()
 
 
-class OllamaPipeline:
+class Pipeline:
 
     def __init__(self, provider="ollama", model=MODEL):
         self.model = model

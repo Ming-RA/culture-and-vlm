@@ -4,7 +4,7 @@ import io
 import base64
 import subprocess
 from PIL import Image
-from ollama_pipeline import OllamaPipeline
+from helper_functions.pipeline import Pipeline
 from misc.constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES, BOUNDING_BOX_PROMPTS
 
 
@@ -12,7 +12,7 @@ def process_image(base64_image, image_id):
 
     provider = "openai"
     model = "gpt-4o"
-    ollama_pipeline = OllamaPipeline(provider=provider, model=model)
+    ollama_pipeline = Pipeline(provider=provider, model=model)
 
     category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
     print(f"Image Cateegory: {category}")
@@ -48,7 +48,7 @@ def bounding_boxes(base64_image, image_id):
 
     provider = "openai"
     model = "gpt-4o"
-    ollama_pipeline = OllamaPipeline(provider=provider, model=model)
+    ollama_pipeline = Pipeline(provider=provider, model=model)
 
     category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
     print(f"Image Cateegory: {category}")
