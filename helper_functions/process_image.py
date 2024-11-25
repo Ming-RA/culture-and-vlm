@@ -24,7 +24,7 @@ def process_image(base64_image, image_id):
     line = {
         'Image ID': image_id,
         'Category': category,
-        'Analysis Result': result,
+        'Analysis Result': result[0],
         'Culture': culture}
 
     if provider == "ollama":
@@ -38,6 +38,8 @@ def process_image(base64_image, image_id):
         writer.writerow(line)
 
     print(f"Results appended to {CSV_FILENAME}")
+
+    return (result[1:])
 
 
 def bounding_boxes(base64_image, image_id):
@@ -62,7 +64,7 @@ def bounding_boxes(base64_image, image_id):
     line = {
         'Image ID': image_id,
         'Category': category,
-        'Bounding Boxes + Labels': result}
+        'Bounding Boxes + Labels': result[0]}
 
     if provider == "ollama":
         time.sleep(1)
@@ -73,3 +75,5 @@ def bounding_boxes(base64_image, image_id):
         writer.writerow(line)
 
     print(f"Results appended to {CSV_FILENAME}")
+
+    return (result[1:])

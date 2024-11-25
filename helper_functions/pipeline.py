@@ -64,16 +64,15 @@ class Pipeline:
         )
 
         # Add token usage tracking
-        # usage = response.usage
-        # input_tokens = usage.prompt_tokens
-        # output_tokens = usage.completion_tokens
-        # total_tokens = usage.total_tokens
+        usage = response.usage
+        input_tokens = usage.prompt_tokens
+        output_tokens = usage.completion_tokens
 
-        # print(f"Input tokens: {input_tokens}")
-        # print(f"Output tokens: {output_tokens}")
-        # print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
+        print(f"Input tokens: {input_tokens}")
+        print(f"Output tokens: {output_tokens}")
+        print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
 
-        return response.choices[0].message.content
+        return (response.choices[0].message.content, input_tokens, output_tokens)
 
     def find_bounding_boxes(self, base64_image, prompt, system_prompt=SYSTEM_PROMPT, messages=[]):
         class BoxLabel(BaseModel):
@@ -121,4 +120,4 @@ class Pipeline:
         print(f"Output tokens: {output_tokens}")
         print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
 
-        return response.choices[0].message.content
+        return (response.choices[0].message.content, input_tokens, output_tokens)

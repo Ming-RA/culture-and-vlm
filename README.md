@@ -1,6 +1,6 @@
 # How to run
 
-First setup Ollama
+First setup Ollama or setup your API keys in a .env file for OpenAI or Gemini.
 
 ```shell
 mkdir -p ~/local
@@ -13,9 +13,15 @@ Install Requirements
 pip install -r requirements.txt
 ```
 
-Then run script
+Then run the script for vqa or bounding boxes
 ```shell
-python ollama_run.py
+python run_bounding_boxes.py
 ```
 
-Currently this prints to terminal, but will shortly be updated to print in a document
+or
+
+```shell
+python run_vqa.py
+```
+
+All data is pushed to the output directory. Update constants accordingly. Token count/analysis may only work for OpenAI. May need to comment out if not using OpenAI.

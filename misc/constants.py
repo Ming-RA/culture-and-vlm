@@ -4,7 +4,7 @@ PROMPT2 = "Given the image and the description given by the user, please give a 
 
 MODEL = "llava:13b"
 
-CSV_FILENAME = "gpt-4o_bounding_boxes.csv"
+CSV_FILENAME = "output_data/gpt-4o_bounding_boxes.csv"
 
 FIELDNAMES = ['Image ID', 'Category', 'Bounding Boxes + Labels']
 

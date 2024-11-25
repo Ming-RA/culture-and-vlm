@@ -58,14 +58,23 @@ def main():
             reader = csv.reader(csvfile)
             processed_count = sum(1 for row in reader) - 1  # Subtract header row
 
+    input_tokens = 0
+    output_tokens = 0
+
     # Process images starting from where we left off
     for image_file in image_files[processed_count:]:
         if int(image_file[:4]) in images_to_find_bounding_boxes:
             image_path = os.path.join(images_dir, image_file)
             base64_image = read_image_as_base64(image_path)
             image_id = image_file[:4]  # Get first 4 characters of filename
-            bounding_boxes(base64_image, image_id)
+            token_counts = bounding_boxes(base64_image, image_id)
+            input_tokens += token_counts[0]
+            output_tokens += token_counts[1]
             time.sleep(10)  # Sleep for 3 second after each analysis
+
+    print(f"Input tokens: {input_tokens}")
+    print(f"Output tokens: {output_tokens}")
+    print(f"Total Cost: ${(input_tokens/1000000)*2.5 + (output_tokens/1000000)*10}")
 
 
 if __name__ == "__main__":
