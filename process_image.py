@@ -1,14 +1,17 @@
 import csv
 import time
+import io
+import base64
 import subprocess
+from PIL import Image
 from ollama_pipeline import OllamaPipeline
 from constants import PROMPT1, PROMPTS, PROMPT2, MODEL, CSV_FILENAME, FIELDNAMES, BOUNDING_BOX_PROMPTS
 
 
 def process_image(base64_image, image_id):
 
-    provider = "gemini"
-    model = "gemini-1.5-flash-002"
+    provider = "openai"
+    model = "gpt-4o"
     ollama_pipeline = OllamaPipeline(provider=provider, model=model)
 
     category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
@@ -38,6 +41,10 @@ def process_image(base64_image, image_id):
 
 
 def bounding_boxes(base64_image, image_id):
+    # Get image dimensions
+    image_data = base64.b64decode(base64_image.split(',')[1])
+    img = Image.open(io.BytesIO(image_data))
+    width, height = img.size
 
     provider = "openai"
     model = "gpt-4o"
@@ -45,9 +52,12 @@ def bounding_boxes(base64_image, image_id):
 
     category = ollama_pipeline.analyze_image(base64_image, PROMPT1).strip()
     print(f"Image Cateegory: {category}")
-    print(f"PROMPT: {BOUNDING_BOX_PROMPTS[category]}")
-    result = ollama_pipeline.find_bounding_boxes(
-        base64_image, BOUNDING_BOX_PROMPTS[category]).strip()
+
+    # Format the prompt with actual image dimensions
+    formatted_prompt = BOUNDING_BOX_PROMPTS[category].format(width=width, height=height)
+    print(f"PROMPT: {formatted_prompt}")
+
+    result = ollama_pipeline.find_bounding_boxes(base64_image, formatted_prompt).strip()
 
     line = {
         'Image ID': image_id,
@@ -55,11 +65,9 @@ def bounding_boxes(base64_image, image_id):
         'Bounding Boxes + Labels': result}
 
     if provider == "ollama":
-        time.sleep(1)  # Sleep for 1 second after each analysis
-        # Run the shell command to stop llava:13b
+        time.sleep(1)
         subprocess.run(["ollama", "stop", MODEL], check=True)
 
-    # Append results to CSV after each image is processed
     with open(CSV_FILENAME, 'a', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
         writer.writerow(line)

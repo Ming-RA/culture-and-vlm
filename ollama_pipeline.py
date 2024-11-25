@@ -22,7 +22,6 @@ class OllamaPipeline:
                 api_key='ollama',  # required, but unused
             )
         elif provider == 'gemini':
-            self.model = model
             self.client = OpenAI(
                 base_url='https://generativelanguage.googleapis.com/v1beta/',
                 api_key=os.getenv('GEMINI_API_KEY'),
@@ -78,10 +77,10 @@ class OllamaPipeline:
 
     def find_bounding_boxes(self, base64_image, prompt, system_prompt=SYSTEM_PROMPT, messages=[]):
         class BoxLabel(BaseModel):
-            x: int
-            y: int
-            width: int
-            height: int
+            x1: int
+            y1: int
+            x2: int
+            y2: int
             label: str
 
         class Boxes(BaseModel):

@@ -24,14 +24,14 @@ PROMPTS = {
     "Tally": "Look for any tallying methods or counting tools in the image. What do these elements indicate about the culture's numerical systems or record-keeping practices?"}
 
 BOUNDING_BOX_PROMPTS = {
-    "Musical": "Identify any musical instruments, performances, or symbols in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Architecture": "Locate the architectural features in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Clothing": "Identify the attire of individuals in the image. Provide the bounding box coordinates and label for each garment or accessory in JSON format.",
-    "Buddhist": "Find any Buddhist symbols, practices, or figures in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Food": "Detect any food items or dining scenes in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Greeting": "Identify forms of greeting or social gestures in the image. Provide the bounding box coordinates and label for each gesture in JSON format.",
-    "Beverage": "Locate any beverages or drinking customs depicted in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Garden": "Find any garden or natural elements in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Utensils": "Identify any tools or utensils shown in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Wedding": "Locate any wedding scenes or symbols in the image. Provide the bounding box coordinates and label for each element in JSON format.",
-    "Tally": "Identify any tallying methods or counting tools in the image. Provide the bounding box coordinates and label for each element in JSON format."}
+    "Musical": """In this {width}x{height} image, identify any musical instruments, performances, or symbols. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Architecture": """In this {width}x{height} image, locate the architectural features. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Clothing": """In this {width}x{height} image, identify the attire of individuals. For each garment or accessory, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Buddhist": """In this {width}x{height} image, find any Buddhist symbols, practices, or figures. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Food": """In this {width}x{height} image, detect any food items or dining scenes. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Greeting": """In this {width}x{height} image, identify forms of greeting or social gestures. For each gesture, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Beverage": """In this {width}x{height} image, locate any beverages or drinking customs depicted. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Garden": """In this {width}x{height} image, find any garden or natural elements. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Utensils": """In this {width}x{height} image, identify any tools or utensils shown. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Wedding": """In this {width}x{height} image, locate any wedding scenes or symbols. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner.""",
+    "Tally": """In this {width}x{height} image, identify any tallying methods or counting tools. For each element, provide a JSON with bounding box coordinates where (x1,y1) is top-left corner and (x2,y2) is bottom-right corner."""}
