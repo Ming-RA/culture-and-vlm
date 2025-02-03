@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambiguous Images Dataset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+        }
+        .image-grid img {
+            width: 32px;
+            height: 32px;
+        }
+        .download-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .download-table th, .download-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .download-table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<a href="#"> &lt; Back to Alex Krizhevsky’s home page</a>
+
+<div class="container">
+    <p>The Ambiguous Images dataset is a labeled dataset of <a href="#">460 images</a> from various countries and cultures.</p>
+
+    <h1>The Ambiguity of the images are defined based on the following measures of cultural Ambiguity:
+
+    <p> Complexity (C) - Number of identifiable cultural elements </p>
+    <p> Diversity (D) - Number of unique cultures attributable to elements in the image </p>
+    <p> Geographical/Cultural Distance (G) - How far are the countries geographically ( Proportional measurement 0-1) </p>
+    <p> Rarity (R) - Population size of a cultural group </p>
+    <p> Historical Value (H) - Resembelance with modern culture </p>
+    </h1>
+
+
+    <h3>Here are the classes in the dataset, as well as 10 random images from each:</h3>
+
+    <div class="image-grid">
+        <!-- 10 classes, each with 10 images -->
+        <img src="image1.png" alt="">
+        <img src="image2.png" alt="">
+        <img src="image3.png" alt="">
+        <!-- Add more images -->
+    </div>
+
+    <h3>Download</h3>
+    <p>If you're going to use this dataset, please cite the tech report at the bottom of this page.</p>
+
+    <table class="download-table">
+        <tr>
+            <th>Version</th>
+            <th>Size</th>
+            <th>md5sum</th>
+        </tr>
+        <tr>
+            <td><a href="#">Abiguous Dataset python version</a></td>
+            <td>163 MB</td>
+            <td>c58f30108f718f92721af3b95e74349a</td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
